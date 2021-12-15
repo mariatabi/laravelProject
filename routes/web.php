@@ -13,6 +13,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+use App\Http\Controllers\HController;
+use App\Http\Controllers\MessageController;
+use App\Events\SendMes;
+
+Route::post('/create', [ MessageController::class, 'create' ]);
+Route::get('/message/{id}', [ MessageController::class, 'view' ]);
+
+Auth::routes();
+
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
